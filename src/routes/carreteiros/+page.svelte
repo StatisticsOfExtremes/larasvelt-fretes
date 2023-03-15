@@ -7,18 +7,19 @@
 	
 	let identificacaoMotorista;
 	
-	let identificacaoDono = '';
+	let nomeMotorista;
 	
-	let nomeDono = '';
+	let identificacaoDono;
+	
+	let nomeDono;
 	
 	let motoristaDono = false;
 	
-	function changeBool(e) {
-		motoristaDono = e.target.value;
-		console.log(motoristaDono);
-	};
+	let motoristaDonoCarreta = false;
 	
+	let identificacaoDonoCarreta;
 	
+	let nomeDonoCarreta;
 </script>
 
 <main>
@@ -30,12 +31,12 @@
 
 		<div>
 			<label for="nome">Nome:</label>
-			<input type="text" id="nome" name="nome">
+			<input type="text" id="nome" name="nome" bind:value={nomeMotorista}>
 		</div>
 		
 		<div>
 			<label for="cpf" >CPF:</label>
-			<input bind:value={identificacaoMotorista} type="text" id="cpf" name="cpf">
+			<input type="text" id="cpf" name="cpf" bind:value={identificacaoMotorista}>
 		</div>
 		
 		<div>
@@ -74,17 +75,35 @@
 					Motorista é o dono?
 					<div>
 						<label for="motorista-dono-s">Sim</label>
-						<input type="radio" id="motorista-dono-sim" on:change={e => changeBool(e)} value="true" name="motorista-dono">
+						<input type="radio" id="motorista-dono-sim" on:change={() => motoristaDono = !motoristaDono} value="true" name="motorista-dono">
 					</div>
 					
 					<div>
 						<label for="motorista-dono-n">Não</label>
-						<input type="radio" id="motorista-dono-n" on:change={e => changeBool(e)} value="false" name="motorista-dono" checked>
+						<input type="radio" id="motorista-dono-n" on:change={() => motoristaDono = !motoristaDono} value="false" name="motorista-dono" checked>
 					</div>
 			</div>
 			<div>
-				<InputDonoVeiculo motoristaDono identificacaoMotorista nomeMotorista bind:identificacaoDono bind:nomeDono/>
-			</div>
+				{#if motoristaDono == true}
+				<div>				
+					<label for="identificador-dono">CPF/CNPJ PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={identificacaoMotorista} readonly />
+				</div>
+				<div>
+					<label for="nome-dono">NOME PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={nomeMotorista} readonly />
+				</div>				
+				{:else}
+				<div>
+					<label for="identificador-dono">CPF/CNPJ PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={identificacaoDono}/>
+				</div>
+				<div>
+					<label for="nome-dono">NOME PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={nomeDono}/>
+				</div>
+				{/if}
+				</div>
 			</div>
 		{:else}
 			<div>
@@ -101,20 +120,42 @@
 				<label for="ANTT">ANTT</label>
 				<input type="text" for="modelo" id="modelo"/>
 			</div>
-
+			<!-- -->
+			
 			<div>
 				Motorista é o dono?
 				<div>
 					<label for="motorista-dono-s">Sim</label>
-					<input type="radio" id="motorista-dono-sim" on:change={e => changeBool(e)} value="true" name="motorista-dono">
+					<input type="radio" id="motorista-dono-sim" on:change={() => motoristaDono = !motoristaDono} value="true" name="motorista-dono">
 				</div>
 				
 				<div>
 					<label for="motorista-dono-n">Não</label>
-					<input type="radio" id="motorista-dono-n" on:change={e => changeBool(e)} value="false" name="motorista-dono" checked>
+					<input type="radio" id="motorista-dono-n" on:change={() => motoristaDono = !motoristaDono} value="false" name="motorista-dono" checked>
 				</div>
 			</div>
 			
+				<div>
+				{#if motoristaDono === true}
+				<div>				
+					<label for="identificador-dono">CPF/CNPJ PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={identificacaoMotorista} readonly />
+				</div>
+				<div>
+					<label for="nome-dono">NOME PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={nomeMotorista} readonly />
+				</div>				
+				{:else}
+				<div>
+					<label for="identificador-dono">CPF/CNPJ PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={identificacaoDono}/>
+				</div>
+				<div>
+					<label for="nome-dono">NOME PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={nomeDono}/>
+				</div>
+				{/if}
+				</div>
 			<hr />
 			
 			<div>
@@ -132,17 +173,38 @@
 				<input type="text" for="modelo-carreta" id="modelo-carreta"/>
 			</div>
 			<div>
-				Motorista é o dono?
+				Motorista é o dono da Carreta?
 				<div>
 					<label for="motorista-dono-s">Sim</label>
-					<input type="radio" id="motorista-dono-sim" on:change={e => changeBool(e)} value="true" name="motorista-dono-carreta">
+					<input type="radio" id="motorista-dono-sim" on:change={() => motoristaDonoCarreta = !motoristaDonoCarreta} value="true" name="motorista-dono-carreta">
 				</div>
 				
 				<div>
 					<label for="motorista-dono-n">Não</label>
-					<input type="radio" id="motorista-dono-n" on:change={e => changeBool(e)} value="false" name="motorista-dono-carreta" checked>
+					<input type="radio" id="motorista-dono-n" on:change={() => motoristaDonoCarreta = !motoristaDonoCarreta} value="false" name="motorista-dono-carreta" checked>
 				</div>
 			</div>
+				<div>
+				{#if motoristaDonoCarreta === true}
+				<div>				
+					<label for="identificador-dono">CPF/CNPJ PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={identificacaoMotorista} readonly />
+				</div>
+				<div>
+					<label for="nome-dono">NOME PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={nomeMotorista} readonly />
+				</div>				
+				{:else}
+				<div>
+					<label for="identificador-dono">CPF/CNPJ PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={identificacaoDonoCarreta}/>
+				</div>
+				<div>
+					<label for="nome-dono">NOME PROPRIETÁRIO<label>
+					<input type="text" id="identificador-dono" name="identificador-dono" bind:value={nomeDonoCarreta}/>
+				</div>
+				{/if}
+				</div>
 		{/if}
 	</form>
 </main>	
