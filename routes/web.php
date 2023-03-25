@@ -17,3 +17,18 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Home');
 });
+
+Route::get('/fretes', function () {
+    return Inertia::render('Fretes');
+});
+
+Route::get('/carreteiros', function () {
+    return Inertia::render('Carreteiros');
+});
+
+Route::post('/logout', function () {
+    return dd("logout the user");
+});
+
+
+
