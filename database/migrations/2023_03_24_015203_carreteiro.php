@@ -13,12 +13,14 @@ return new class extends Migration
     {
         //
         Schema::create('carreteiros', function (Blueprint $table ) {
-            $table->id();
-            $table->string('name');
-            $table->string('cpf');
-            $table->string('telefone');
-            $table->timestamps('data_criacao');
-        } )
+            $table->id()->autoincrement();
+            $table->string('nome', 200)->nullable(false);
+            $table->string('cpf', 11)->nullable(false);
+            $table->string('telefone', 11);
+            $table->timestamp('created_at')->nullable()->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
+           // $table->foreignId('veiculo_id')->constrained('veiculos');
+        });
     }
 
     /**

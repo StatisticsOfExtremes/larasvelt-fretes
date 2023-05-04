@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\CarreteiroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,14 @@ Route::get('/fretes', function () {
     return Inertia::render('Fretes');
 });
 
-Route::get('/carreteiros', function () {
-    return Inertia::render('Carreteiros');
+Route::prefix('carreteiros')->group(function () {
+    Route::get('/', [CarreteiroController::class, 'index'])->name('carreteiros.index');
+    
+    Route::get('/novo', [CarreteiroController::class, 'create'])->name('carreteiros.novo');
+    
+    Route::post('/', [CarreteiroController::class, 'store']);
 });
+
 
 Route::post('/logout', function () {
     return dd("logout the user");
