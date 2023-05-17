@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('identificacao_dono', 15);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate();
-            $table->foreignId('carreteiro_id')->constrained('carreteiros');
         });
     }
 

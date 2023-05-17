@@ -29,23 +29,6 @@ class CarreteiroController extends Controller
      */
     public function store(Request $request)
     {
-        
-        /*
-        $request->validate([
-                'tipoVeiculo' => ['required'],
-                'veiculo.placaVeiculo' => ['required'],
-                'veiculo.anttVeiculo' => ['required'],
-                'telefoneMotorista' => ['nullable'],
-                'identificacaoMotorista' => ['required'],
-                'nomeMotorista' => ['required', 'max:100'],
-                'veiculo.identificacaoDono' => ['required'],
-                'veiculo.nomeDono' => ['required'],
-                'veiculo.identificacaoDonoCarreta' => ['nullable'],
-                'nomeDonoCarreta' => ['nullable'],
-                'placaCarreta' => ['nullable'],
-                'anttCarreta' => ['nullable'] 
-        ]);
-*/
 
         $carreteiro = Carreteiro::create([
             'nome' => $request->motorista['nome'],
@@ -100,10 +83,6 @@ class CarreteiroController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function getCarreteirosVeiculos(Carreteiro $carreteiro): array {
-        return ['placa' => []];
     }
 
     public function create() {

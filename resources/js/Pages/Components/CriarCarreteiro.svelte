@@ -68,10 +68,11 @@
 </script>
 
 <main>
+	<div class="space-y-12">
+	<h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
 	<form on:submit|preventDefault={handleSubmit}>
 		
 	<div>
-		<h1> Carreteiro </h1>
 		
 		<div>
 			<label for="nome">Nome:</label>
@@ -89,7 +90,7 @@
 		</div>
 		
 	</div>
-''
+
 	<div>
 		<h1> Veículo </h1>
 
@@ -253,6 +254,7 @@
 			</div>
 		{/if}
 		<button type="submit" as="button">CRIAR</button>
+	</div>
 	</form>
 
 </main>
