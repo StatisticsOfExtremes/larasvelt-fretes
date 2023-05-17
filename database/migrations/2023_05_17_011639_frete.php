@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('fretes', function (Blueprint $table) {
             $table->increments('id');
             $table->date('data_carregamento')->nullable();
+            $table->enum('status', ['carregando', 'em andamento', 'finalizado']);
             $table->foreignId('id_carreteiro');
             $table->foreignId('id_nota');
             $table->decimal('frete_carreteiro', 8, 2)->nullable();
