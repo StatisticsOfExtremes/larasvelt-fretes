@@ -36,12 +36,16 @@
 			<tbody>
 				{#each carreteiros as carreteiro, index}
 				<tr>
-					<td>{index + 1}</td>
+					<td>{carreteiro.id}</td>
 					<td>{carreteiro.nome}</td>
 					<td>
 						{#each carreteiro.veiculos as veiculo}
 							{veiculo.placa}
 						{/each}
+					</td>
+
+					<td>
+						<Link href="carreteiros/apagar/{carreteiro.id}" method="post">Excluir</Link>
 					</td>
 				</tr>
 				{/each}

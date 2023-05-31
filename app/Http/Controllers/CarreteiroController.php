@@ -82,7 +82,11 @@ class CarreteiroController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $carreteiro = Carreteiro::find($id);
+
+        $carreteiro->delete();
+
+        return to_route('carreteiros.index');
     }
 
     public function create() {

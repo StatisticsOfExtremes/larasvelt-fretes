@@ -29,6 +29,8 @@ Route::prefix('carreteiros')->group(function () {
     Route::get('/novo', [CarreteiroController::class, 'create'])->name('carreteiros.novo');
     
     Route::post('/', [CarreteiroController::class, 'store']);
+
+    Route::post('/apagar/{id}', [CarreteiroController::class, 'destroy'])->name('carreteiros.apagar');
 });
 
 

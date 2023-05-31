@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('data_carregamento')->nullable();
             $table->enum('status', ['carregando', 'em andamento', 'finalizado']);
             $table->foreignId('id_carreteiro');
-            $table->foreignId('id_nota');
+            $table->foreignId('id_carregamento');
             $table->decimal('frete_carreteiro', 8, 2)->nullable();
             $table->decimal('pct_adiantamento', 8, 2)->nullable();
             $table->decimal('valor_carregamento', 8, 2)->nullable()->default(0);
