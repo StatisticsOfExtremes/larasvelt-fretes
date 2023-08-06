@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fretes', function (Blueprint $table) {
+        Schema::create('frete', function (Blueprint $table) {
             $table->increments('id');
             $table->date('data_carregamento')->nullable();
             $table->enum('status', ['carregando', 'em andamento', 'finalizado']);

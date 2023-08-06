@@ -5,10 +5,12 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Frete>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FreteFactory>
  */
 class FreteFactory extends Factory
 {
+    protected $model = Frete::class;
+
     /**
      * Define the model's default state.
      *
@@ -17,7 +19,7 @@ class FreteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            
         ];
     }
 }

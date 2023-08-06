@@ -8,7 +8,9 @@ use App\Models\Carreteiro;
 
 use App\Models\Veiculo;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CarreteiroController extends Controller
 {
@@ -17,7 +19,7 @@ class CarreteiroController extends Controller
      */
     public function index()
     {
-        $carreteiros = Carreteiro::with('veiculos:placa')->get();
+        $carreteiros = Carreteiro::with('veiculos:placa,tipo')->get();
 
         return Inertia::render('Carreteiros',[
             'carreteiros' => $carreteiros
@@ -82,11 +84,14 @@ class CarreteiroController extends Controller
      */
     public function destroy(string $id)
     {
-        $carreteiro = Carreteiro::find($id);
+        try {
+            $carreteiro = Carreteiro::findOrFail($id);
+            $carreteiro->delete();
 
-        $carreteiro->delete();
-
-        return to_route('carreteiros.index');
+            return to_route('carreteiros.index', status: 303)->with(['success' => true, 'message' => 'Item deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Error deleting item:'. $e->getMessage()], 500);
+        }
     }
 
     public function create() {

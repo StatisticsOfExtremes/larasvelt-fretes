@@ -12,7 +12,7 @@ class FreteController extends Controller
      */
     public function index()
     {
-        //
+        return Frete::all();
     }
 
     /**

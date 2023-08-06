@@ -1,11 +1,22 @@
 <script context="module">
     export { default as layout } from './Components/Layout.svelte';
+
   </script>
 
 <script>
 	import { page } from '@inertiajs/svelte';
 	import { Link } from '@inertiajs/svelte';
+    import { router } from '@inertiajs/svelte'
+
 	let carreteiros = $page.props.carreteiros;
+
+
+    async function handleDelete(id) {
+        const response = await router.post(`carreteiros/apagar/${id}`, {method: 'post'});
+        $: carreteiros = carreteiros.filter(carreteiros => carreteiros.id != id );
+
+        console.log(response);
+    }
 </script>
 
 <main>
@@ -20,7 +31,7 @@
 
 	<div>
 		<div class="">
-			<Link as="button" href="/carreteiros/novo" class="px-4 py-2 font-semibold text-sm bg-green-700 text-white text-left rounded-full shadow-sm">Adicionar</Link>
+			<a href="/carreteiros/novo" class="px-4 py-2 font-semibold text-sm bg-green-700 text-white text-left rounded-full shadow-sm">Adicionar</a>
 		</div>
 
 
@@ -30,6 +41,8 @@
 					<th> # </th>
 					<th> Nome </th>
 					<th> Veiculo Ativo </th>
+                    <th> Tipo </th>
+                    <th> </th>
 				</tr>
 			</thead>
 
@@ -38,14 +51,15 @@
 				<tr>
 					<td>{carreteiro.id}</td>
 					<td>{carreteiro.nome}</td>
+                    {#each carreteiro.veiculos as veiculo}
 					<td>
-						{#each carreteiro.veiculos as veiculo}
-							{veiculo.placa}
-						{/each}
+                        {veiculo.placa}
 					</td>
 
+                        <td>{veiculo.tipo}</td>
+                    {/each}
 					<td>
-						<Link href="carreteiros/apagar/{carreteiro.id}" method="post">Excluir</Link>
+						<button class="border rounded p-1.5 hover:bg-red-600" on:click={() => handleDelete(carreteiro.id)}>Excluir</button>
 					</td>
 				</tr>
 				{/each}
@@ -54,6 +68,6 @@
 
 	</div>
 
-	
+
 
 </main>

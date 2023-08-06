@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('antt', 10)->nullable();
             $table->string('nome_dono', 100);
             $table->string('identificacao_dono', 15);
+            $table->enum('tipo', ['carreta', 'truck', '3/4','toco', 'furgao']);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate();
         });

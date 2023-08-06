@@ -20,7 +20,8 @@ class VeiculoFactory extends Factory
             'placa' => fake()->text(6),
             'antt' => fake()->text(10),
             'nome_dono'=>fake()->name(),
-            'identificacao_dono'=>fake()->text(10)
+            'tipo'=> fake()->randomElement(['carreta', 'truck', '3/4', 'toco', 'furgao']),
+            'identificacao_dono'=>fake()->numerify('#############')
         ];
     }
 }
