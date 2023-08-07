@@ -19,7 +19,10 @@ class CarreteiroController extends Controller
      */
     public function index()
     {
-        $carreteiros = Carreteiro::with('veiculos:placa,tipo')->get();
+        $carreteiros = Carreteiro::with(['veiculos' => function($query) {
+            $query->wherePivot('ativo', 1)
+                ->select('veiculos.id', 'placa', 'tipo');
+        }])->get();
 
         return Inertia::render('Carreteiros',[
             'carreteiros' => $carreteiros
