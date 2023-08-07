@@ -21,7 +21,7 @@ class CarreteiroFactory extends Factory
         return [
             'nome' => $this->faker->name,
             'cpf' => $this->faker->unique()->numerify('###########'),
-            'telefone' => $this->faker->numerify('(##) #####-####'),
+            'telefone' => $this->faker->numerify('###########'),
         ];
     }
 

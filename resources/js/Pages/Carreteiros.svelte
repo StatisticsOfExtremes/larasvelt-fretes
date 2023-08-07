@@ -20,27 +20,17 @@
 </script>
 
 <main>
-
 	<div>
-		<h1>
-			Carreteiros
-		</h1>
-
-	</div>
-
-
-	<div>
-		<div class="">
-			<a href="/carreteiros/novo" class="px-4 py-2 font-semibold text-sm bg-green-700 text-white text-left rounded-full shadow-sm">Adicionar</a>
+		<div class="p-3">
+			<a href="/carreteiros/novo" class=" self-end px-4 py-2 font-semibold text-sm bg-green-700 text-white text-left rounded-full shadow-sm hover:bg-green-900">Adicionar</a>
 		</div>
 
-
-		<table class="content-stretch">
+		<table class="table-fixed">
 			<thead>
 				<tr>
-					<th> # </th>
-					<th> Nome </th>
-					<th> Veiculo Ativo </th>
+					<th class='w-8'> # </th>
+					<th class='w-64 text-center'> Nome </th>
+					<th class='w-50 text-center'> Veiculo Ativo </th>
                     <th> Tipo </th>
                     <th> </th>
 				</tr>
@@ -49,24 +39,24 @@
 			<tbody>
 				{#each carreteiros as carreteiro}
 				<tr>
-					<td>{carreteiro.id}</td>
-					<td>{carreteiro.nome}</td>
+					<td class='text-center'>{carreteiro.id}</td>
+					<td class='text-center'>{carreteiro.nome}</td>
                         {#if carreteiro.veiculos.length > 1}
-                            <td>
+                            <td class='text-center'>
                                 {carreteiro.veiculos[0].placa} {carreteiro.veiculos[1].placa}
                             </td>
 
-                            <td> {carreteiro.veiculos[1].tipo} </td>
+                            <td class='text-center'> {carreteiro.veiculos[1].tipo} </td>
 
                             <td>
                                 <button class="border rounded p-1.5 hover:bg-red-600" on:click={() => handleDelete(carreteiro.id)}>Excluir</button>
                             </td>
                         {:else if carreteiro.veiculos.length > 0}
-                            <td>
+                            <td class='text-center'>
                                 {carreteiro.veiculos[0].placa}
                             </td>
 
-                            <td> {carreteiro.veiculos[0].tipo} </td>
+                            <td class='text-center'> {carreteiro.veiculos[0].tipo} </td>
 
                             <td>
                                 <button class="border rounded p-1.5 hover:bg-red-600" on:click={() => handleDelete(carreteiro.id)}>Excluir</button>
@@ -82,7 +72,6 @@
 				{/each}
 			</tbody>
 		</table>
-
 	</div>
 
 

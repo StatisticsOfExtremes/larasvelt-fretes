@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Veiculo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,12 +17,19 @@ class VeiculoFactory extends Factory
      */
     public function definition(): array
     {
+        $tipo = fake()->randomElement(['cavalo', 'carreta', 'truck', '3/4', 'toco', 'furgao'])
         return [
             'placa' => fake()->text(6),
             'antt' => fake()->text(10),
-            'nome_dono'=>fake()->name(),
-            'tipo'=> fake()->randomElement(['carreta', 'truck', '3/4', 'toco', 'furgao']),
-            'identificacao_dono'=>fake()->numerify('#############')
+            'nome_dono' => fake()->name(),
+            'tipo' => $tipo,
+            'identificacao_dono' => fake()->numerify('#############'),
+            'carreta_associada' => function (array $attributes) {
+                if ($attributes['tipo'] === 'cavalo') {
+                    return Veiculo::factory()->create()->id;
+                }
+                return null;
+            }
         ];
     }
 }
