@@ -47,20 +47,37 @@
 			</thead>
 
 			<tbody>
-				{#each carreteiros as carreteiro, index}
+				{#each carreteiros as carreteiro}
 				<tr>
 					<td>{carreteiro.id}</td>
 					<td>{carreteiro.nome}</td>
-                    {#each carreteiro.veiculos as veiculo}
-					<td>
-                        {veiculo.placa}
-					</td>
+                        {#if carreteiro.veiculos.length > 1}
+                            <td>
+                                {carreteiro.veiculos[0].placa} {carreteiro.veiculos[1].placa}
+                            </td>
 
-                        <td>{veiculo.tipo}</td>
-                    {/each}
-					<td>
-						<button class="border rounded p-1.5 hover:bg-red-600" on:click={() => handleDelete(carreteiro.id)}>Excluir</button>
-					</td>
+                            <td> {carreteiro.veiculos[1].tipo} </td>
+
+                            <td>
+                                <button class="border rounded p-1.5 hover:bg-red-600" on:click={() => handleDelete(carreteiro.id)}>Excluir</button>
+                            </td>
+                        {:else if carreteiro.veiculos.length > 0}
+                            <td>
+                                {carreteiro.veiculos[0].placa}
+                            </td>
+
+                            <td> {carreteiro.veiculos[0].tipo} </td>
+
+                            <td>
+                                <button class="border rounded p-1.5 hover:bg-red-600" on:click={() => handleDelete(carreteiro.id)}>Excluir</button>
+                            </td>
+                        {:else}
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <button class="border rounded p-1.5 hover:bg-red-600" on:click={() => handleDelete(carreteiro.id)}>Excluir</button>
+                            </td>
+                        {/if}
 				</tr>
 				{/each}
 			</tbody>
